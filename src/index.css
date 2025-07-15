@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-light text-dark font-sans;
+    background: linear-gradient(135deg, #F5F1ED 0%, #E8DDD4 50%, #D4B5A0 100%);
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/20 backdrop-blur-md border border-white/30;
+  }
+  
+  .mystic-gradient {
+    background: linear-gradient(135deg, rgba(184, 169, 154, 0.1) 0%, rgba(212, 181, 160, 0.2) 100%);
+  }
+  
+  .talking-avatar {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .talking-avatar.speaking::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle, rgba(184, 169, 154, 0.3) 0%, transparent 70%);
+    animation: pulse 1s ease-in-out infinite;
+    pointer-events: none;
+  }
+  
+  .voice-wave {
+    display: inline-block;
+    width: 4px;
+    height: 20px;
+    background: currentColor;
+    margin: 0 1px;
+    animation: wave 1.2s ease-in-out infinite;
+  }
+  
+  .voice-wave:nth-child(2) { animation-delay: 0.1s; }
+  .voice-wave:nth-child(3) { animation-delay: 0.2s; }
+  .voice-wave:nth-child(4) { animation-delay: 0.3s; }
+  .voice-wave:nth-child(5) { animation-delay: 0.4s; }
+  
+  @keyframes wave {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(2); }
+  }
+}
