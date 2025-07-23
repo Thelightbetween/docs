@@ -5,6 +5,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <Script id="intercom-settings" strategy="beforeInteractive">
         {`
+          console.log('[Intercom] Settings script injected');
           window.intercomSettings = {
             app_id: 'z240m4p6',
             alignment: 'left',
@@ -18,10 +19,12 @@ function MyApp({ Component, pageProps }) {
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
+            console.log('[Intercom] Messenger script running');
             (function() {
               var w = window;
               var ic = w.Intercom;
               if (typeof ic === "function") {
+                console.log('[Intercom] Intercom function exists, updating...');
                 ic('reattach_activator');
                 ic('update', window.intercomSettings);
               } else {
@@ -31,6 +34,7 @@ function MyApp({ Component, pageProps }) {
                 i.c = function(args) { i.q.push(args); };
                 w.Intercom = i;
                 function l() {
+                  console.log('[Intercom] Loading widget script...');
                   var s = d.createElement('script');
                   s.type = 'text/javascript';
                   s.async = true;
